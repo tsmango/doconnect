@@ -1,0 +1,33 @@
+- render(:layout => '/communities/container') do
+	- form_for(@page) do |f|
+		%h1
+			- if !@page.overview?
+				Update a Page
+			- else
+				Overview
+		%hr.spacer-bottom
+		
+		= f.error_messages
+		
+		%p
+			- if !@page.overview?
+				= f.label(:name, 'Title:')
+				= f.text_field(:name)
+			- else
+				&nbsp;
+		
+		%p
+			= render(:partial => '/shared/markdown_cheat_sheet')
+			= f.text_area(:body, :value => (@page.last_revision ? @page.last_revision.body : ''))
+		
+		%p
+			= f.check_box(:minor_revision)
+			= f.label(:minor_revision, "Minor change, don't create a new version.")
+		
+		%p.submit
+			= link_to('Delete Page', @page, :confirm => 'Are you sure? There is no undo.', :method => :delete, :class => 'delete')
+			
+			%button{:type => 'submit'}
+				%span Update Page
+			
+			= 'or ' + link_to('Cancel', @page)

@@ -1,0 +1,19 @@
+#sidebar
+	%form{:action => '/search', :method => 'get'}
+		%input{:id => 'q', :name => 'q', :type => 'text', :value => h(params[:q])}
+	
+	%h1 Communities
+	%hr
+	%ul
+		- if logged_in?
+			- current_user.communities.each do |community|
+				%li= link_to(h(community.name), community.url)
+		
+		- if logged_in?
+			%li= link_to('Start a Community', new_community_path)
+
+#main
+	= yield
+
+:javascript
+	$j('#q').watermark('Search for a Community...');

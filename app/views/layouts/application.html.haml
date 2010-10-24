@@ -1,0 +1,58 @@
+!!! Strict
+%html{:xmlns => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en', :lang => 'en'}
+	%head
+		%title #{(h(@community.name) + ' on ') if (defined?(@community) and !@community.new_record?)}do*connect
+		%link{:rel => 'icon', :type => 'image/png', :href => '/favicon.png'}
+		= stylesheet_link_tag('application')
+		= javascript_include_tag(:all)
+		:javascript
+			var $j = jQuery.noConflict();
+	%body
+		- if !flash[:notice].blank?
+			#flash{:onclick => 'hideErrorMessage();', :style => 'display:none;'}
+				%div
+					= flash[:notice]
+		
+		#header
+			#account
+				- if logged_in?
+					= current_user.email_address + ' &middot;'
+					= link_to('Logout', logout_path)
+				- else
+					= link_to('Register', register_path) + ' &middot;'
+					= link_to('Login', login_path)
+			
+			- if defined?(@community) and !@community.new_record?
+				#community-name
+					%span#switcher
+						= link_to(h(@community.name), root_path, :id => 'current')
+						
+						%ul
+							- if logged_in?
+								%li= link_to('Dashboard', root_url(:host => BASE_DOMAIN))
+								- current_user.communities.each do |community|
+									%li= link_to(h(community.name), community.url)
+							- else
+								%li= link_to('&#8592; Back to do*connect', root_url(:host => BASE_DOMAIN))
+			- else
+				#logo
+					= link_to(image_tag('logo_light_small.png'), root_path)
+		
+		#content-wrapper
+			#content
+				= yield
+			
+			%br.clear
+		
+		#footer-wrapper
+			#footer
+				%span#links
+					= link_to('Contact Us', 'mailto:hello@doconnect.me') + ' &middot;'
+					= link_to('Follow Us', 'http://twitter.com/doconnectme', :target => '_blank')
+				
+				&copy; Copyright 2010 Thomas Mango. Built for Rails Rumble 2010.
+		
+		- if !flash[:notice].blank?
+			:javascript
+				Effect.SlideDown('flash', { duration: 0.35 });
+				window.setTimeout('hideErrorMessage()', 8000);

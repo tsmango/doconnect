@@ -1,0 +1,28 @@
+#markdown
+	#badge Using Markdown
+	#cheat-sheet
+		%table{:cellpadding => 0, :cellspacing => 0}
+			%tr
+				%td
+					%span # Header 1
+					%span ## Header 2
+					%span ### Header 3
+		
+				%td
+					%span **bold**
+					%span _italics_
+		
+				%td
+					%span * List Item
+					%span * List Item
+					%span * List Item
+		
+				%td
+					%span 1. List Item 1
+					%span 2. List Item 2
+					%span 3. List Item 3
+	
+	:javascript
+		$j('#markdown #badge').click(function(){
+			$j('#markdown #cheat-sheet').toggle();
+		});

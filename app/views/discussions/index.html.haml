@@ -1,0 +1,14 @@
+- render(:layout => '/communities/container') do
+	%h1
+		%span.actions
+			= link_to('New Discussion &#8594;', new_discussion_path)
+		Discussions
+	%hr.spacer-bottom
+	
+	- if @discussions.size > 0
+		#discussions
+			= render(@discussions)
+		
+	- else
+		.nothing
+			There aren't any discussions yet. #{link_to('Start a Discussion', new_discussion_path)}.

@@ -1,0 +1,10 @@
+- content_tag_for(:div, reply) do
+	= image_tag(reply.user.gravatar_url(:size => 48))
+	
+	.meta
+		By #{h(reply.user.name)} &middot; #{time_ago_in_words(reply.created_at)} ago
+	
+	.body
+		= reply.body_as_html
+
+%hr

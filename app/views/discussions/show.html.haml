@@ -1,0 +1,12 @@
+- render(:layout => '/communities/container') do
+	%h1
+		- if can_manage?
+			%span.actions
+				= link_to('Delete', @discussion, :confirm => 'Are you sure? There is no undo.', :method => :delete)
+			
+		= h(@discussion.title)
+	%hr.spacer-bottom
+	
+	#replies
+		= render(@discussion.replies)
+		= render(:partial => '/replies/new')

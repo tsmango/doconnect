@@ -1,0 +1,55 @@
+%p
+	= f.label(:supported_methods, 'Request Method:')
+	= f.select(:supported_methods, ['GET', 'POST', 'PUT', 'DELETE'])
+
+%p
+	= f.label(:path, 'Resource Path:')
+	%span.with-notes
+		= f.text_field(:path)
+		= "Example: path/to/resource"
+
+%p
+	= f.label(:url, 'Resource URL:')
+	%span.with-notes
+		= f.text_field(:url)
+		= "Example: http://api.#{@community.subdomain}.com/v1/path/to/resource.format"
+
+%p
+	= f.label(:supported_formats, 'Supported Formats:')
+	%span.with-notes
+		= f.text_field(:supported_formats)
+		= "Comma separated. Example: json, xml, rss"
+
+%p
+	= f.label(:description, 'Description:')
+	= f.text_area(:description)
+
+%p
+	= f.check_box(:requires_authentication)
+	= f.label(:requires_authentication, 'Requires Authentication')
+
+%p
+	= f.check_box(:rate_limited)
+	= f.label(:rate_limited, 'Rate Limited')
+
+%h1 Parameters
+
+%hr
+
+- f.fields_for(:parameters) do |builder|
+	= render('parameter_fields', :f => builder)
+
+%p
+	= link_to_add_fields('&plus; Add a Parameter', f, :parameters)
+
+%hr
+
+%h1 Responses
+
+%hr
+
+- f.fields_for(:responses) do |builder|
+	= render('response_fields', :f => builder)
+
+%p
+	= link_to_add_fields('&plus; Add a Response', f, :responses)

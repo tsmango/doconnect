@@ -1,0 +1,18 @@
+- if logged_in?
+	- form_for(@reply, :url => discussion_replies_path(@discussion)) do |f|
+		= image_tag(current_user.gravatar_url(:size => 48))
+
+		.meta
+			By #{h(current_user.name)}
+
+		.body
+			%p
+				= render(:partial => '/shared/markdown_cheat_sheet')
+				= f.text_area(:body)
+
+			%p.submit
+				%button{:type => 'submit'}
+					%span Reply
+- else
+	.nothing
+		#{link_to('Log in', login_path)} or #{link_to('register', register_path)} to join this discussion.

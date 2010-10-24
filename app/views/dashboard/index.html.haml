@@ -1,0 +1,16 @@
+- render(:layout => '/dashboard/container') do
+	- if current_user.communities.size > 0
+		%h1 Recent Activity
+		%hr
+	
+		- if @actions.size > 0
+			#actions
+				= render(@actions)
+		- else
+			.nothing
+				There hasn't been any activity in your Communities, yet.
+	
+	- else
+		.nothing
+			%h2 Welcome to do*connnect.
+			%p Get started by #{link_to('searching', '#search', :onclick => "$j('#q').focus();")} for a existing Community or #{link_to('starting your own', new_community_path)}.

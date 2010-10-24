@@ -1,0 +1,15 @@
+.fields
+	%p
+		.remove_fields
+			= link_to_remove_fields('Remove Parameter', f)
+		= f.label(:name, 'Parameter Name:')
+		= f.text_field(:name)
+	
+	%p
+		= f.text_area(:description)
+	
+	%p
+		= f.check_box(:required)
+		= f.label(:required, 'Required')
+	
+	%hr

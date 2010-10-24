@@ -1,0 +1,65 @@
+- render(:layout => '/communities/container') do
+	%h1
+		- if can_manage?
+			%span.actions
+				= link_to('Edit &#8594;', edit_resource_path(@resource))
+		= h(@resource.supported_methods)
+		= h(@resource.path)
+	%hr.spacer-bottom
+	
+	= @resource.description_as_html
+	
+	#resource-attributes
+		%p
+			%span HTTP Method
+			%span &middot; #{h(@resource.supported_methods)}
+		
+		%p
+			%span Resource URL
+			%span &middot; #{h(@resource.url)}
+		
+		%p
+			%span Supported Formats
+			%span &middot; #{h(@resource.supported_formats)}
+		
+		%p
+			%span Authentication
+			%span &middot; #{@resource.requires_authentication? ? 'Required' : 'Not Required'}
+		
+		%p
+			%span Rate Limiting
+			%span &middot; #{@resource.rate_limited? ? 'Yes, Rate Limited' : 'Not Rate Limited'}
+	
+	- if @resource.parameters.size > 0
+		
+		%h1 Parameters
+		%hr
+		
+		%ul
+			- @resource.parameters.each do |parameter|
+				%li
+					%strong= h(parameter.name)
+					
+					- if parameter.required?
+						(Required)
+					- else
+						(Optional)
+					
+					%p
+						= h(parameter.description)
+	
+	- if @resource.responses.size > 0
+		
+		%h1 Example Responses
+		%hr
+		
+		%ul
+			- @resource.responses.each do |response|
+				%li
+					%strong= h(response.format)
+					
+					- if response.http_code?
+						(#{h(response.http_code)})
+					
+					.code-ray-wrapper
+						%iframe{:src => resource_path(@resource, :response_id => response.id), :frameborder => 0, :width => '100%', :class => 'autoHeight'}

@@ -1,0 +1,12 @@
+- render(:layout => '/communities/container') do
+	%h1
+		%span.actions
+			= link_to('Latest Revision', @page)
+		
+		= h(@page.name)
+	%hr.spacer-bottom
+	
+	%ul
+		- @page_revisions.each do |page_revision|
+			%li
+				#{link_to(page_revision.created_at.strftime("%m/%d/%Y at %I:%M%p"), page_path(page_revision.page, :revision_id => page_revision.id))} - #{time_ago_in_words(page_revision.created_at)} ago

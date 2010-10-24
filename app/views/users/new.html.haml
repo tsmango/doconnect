@@ -1,0 +1,44 @@
+- form_for(@user, :html => {:class => 'new_user single'}) do |f|
+	%h1 Create an Account. It's free.
+	- if defined?(@community) and !can_view?
+		%hr
+		#closed-community
+			This is a #{@community.private? ? 'private' : 'closed'} community. Please #{link_to('log in', login_path)} or register before continuing.
+	-else
+		%hr.spacer-bottom
+	
+	#aside
+		%span
+			Already have an account?
+		%span
+			= link_to('Login now &#8594;', login_path)
+	
+	= f.error_messages
+	
+	%p
+		= f.label(:name, 'Name:')
+		= f.text_field(:name)
+	
+	%p
+		= f.label(:email_address, 'Email Address:')
+		= f.text_field(:email_address)
+	
+	%p
+		= f.label(:password, 'Password:')
+		= f.password_field(:password)
+	
+	%p
+		= f.label(:password_confirmation, 'Confirm Password:')
+		= f.password_field(:password_confirmation)
+	
+	%p.submit
+		%button{:type => 'submit'}
+			%span Create Account
+		
+		- if defined?(@community) and !can_view?
+			or #{link_to('Go back to do*connect', root_url(:host => BASE_DOMAIN))}
+		- elsif !defined?(@community)
+			or #{link_to('take me home', root_path)}
+
+:javascript
+	$j('#user_name').focus();

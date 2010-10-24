@@ -1,0 +1,52 @@
+- if defined?(@community)
+	- render(:layout => '/communities/container') do
+		%h1 Pages
+		%hr.spacer-bottom
+		
+		- if @pages.size > 0
+			%ul#pages
+				- @pages.each do |page|
+					%li= link_to(h(page.name), page)
+			
+		- else
+			.nothing
+				No matching Pages found.
+		
+		%br
+		%h1 Discussions
+		%hr
+		
+		- if @discussions.size > 0
+			#discussions
+				= render(@discussions)
+			
+		- else
+			.nothing
+				No matching Discussions found.
+		
+		%br
+		%h1 Documentation
+		%hr.spacer-bottom
+		
+		- if @resources.size > 0
+			%ul#resources
+				- @resources.each do |resource|
+					%li= link_to(h(resource.path), resource)
+			
+		- else
+			.nothing
+				No matching Documentation found.
+
+- else
+	- render(:layout => '/dashboard/container') do
+		%h1 Communities
+		%hr.spacer-bottom
+		
+		- if @communities.size > 0
+			%ul#resources
+				- @communities.each do |community|
+					%li= link_to(h(community.name), community.url)
+			
+		- else
+			.nothing
+				No matching Communities found.

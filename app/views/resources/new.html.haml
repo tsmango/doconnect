@@ -1,0 +1,16 @@
+- render(:layout => '/communities/container') do
+	- form_for(@resource) do |f|
+		%h1 Create a Resource
+		%hr.spacer-bottom
+		
+		= f.error_messages
+		
+		= render(:partial => 'form', :locals => {:f => f})
+		
+		%hr
+		
+		%p.submit
+			%button{:type => 'submit'}
+				%span Create Resource
+			
+			= 'or ' + link_to('Cancel', root_path)

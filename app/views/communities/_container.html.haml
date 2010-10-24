@@ -1,0 +1,34 @@
+#sidebar
+	%form{:action => '/search', :method => 'get'}
+		%input{:id => 'q', :name => 'q', :type => 'text', :value => h(params[:q])}
+	
+	%h1 Pages
+	%hr
+	%ul
+		- @community.pages.each do |page|
+			%li= link_to(h(page.name), (page.overview? ? root_path : page))
+		
+		- if can_manage?
+			%li= link_to('Add a Page', new_page_path)
+	
+	%h1 Community
+	%hr
+		%ul
+			%li= link_to('Discussions', discussions_path)
+			%li= link_to('Memberships', memberships_path)
+			%li= link_to('Recent Activity', activity_path)
+	
+	%h1 Documentation
+	%hr
+		%ul
+			- @community.resources.each do |resource|
+				%li= link_to("#{h(resource.path)}", resource)
+			
+			- if can_manage?
+				%li= link_to('Add a Resource', new_resource_path)
+
+#main
+	= yield
+
+:javascript
+	$j('#q').watermark('Search this Community...');

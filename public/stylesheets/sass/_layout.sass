@@ -1,0 +1,175 @@
+html, body
+	// :background-color #d6d6d6
+	:background-color #A7AEB8
+	:margin 0
+	:padding 0
+
+#flash
+	:background-color #ffff99
+	:border-bottom 2px solid #ffff00
+	:position absolute
+	:top 0
+	:width 100%
+	
+	div
+		:font-size 15px
+		:line-height 19px
+		:padding 12px 25px
+		:text-align left
+	
+	&:hover
+		:cursor pointer
+
+#header
+	// :background-color #20252b
+	// :background-color #526F90
+	:background-color #414B57
+	:clear both
+	:line-height 23px
+	:padding 10px 25px
+	
+	#logo, #community-name
+		// :color #909090
+		:color #c1c1c1
+		:height 23px
+		:line-height 23px
+		
+		a
+			// :color #c1c1c1
+			:color #ffffff
+	
+	#community-name
+		
+		#switcher
+			:padding-bottom 12px
+			
+			a#current
+				:background
+					:image url(/images/switcher.png)
+					:position 100% 50%
+					:repeat no-repeat
+				:font
+					:family 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif
+					:size 18px
+				:line-height 26px
+				:padding-right 18px
+				:text-shadow #333 0 1px 1px
+				
+				&:hover
+					:background-image url(/images/switcher-hover.png)
+			
+			ul
+				:background-color #414B57
+				:-webkit-border-bottom-left-radius 4px
+				:-webkit-border-bottom-right-radius 4px
+				:-moz-border-radius-bottomleft 4px
+				:-moz-border-radius-bottomright 4px
+				:border-bottom-left-radius 4px
+				:border-bottom-right-radius 4px
+				:display none
+				:left -5px
+				:list-style none
+				:margin 0
+				:padding-top 8px
+				:padding-left 0
+				:position relative
+				:top 0
+				:width 175px
+				
+				li
+					:border-top 1px solid #576576
+					:margin 0
+					:padding 0
+					
+					a
+						:color #c1c1c1
+						:display block
+						:font-size 12px
+						:padding 4px 5px 4px 8px
+						
+						&:hover
+							:color #ffffff
+			
+			&:hover
+				
+				ul
+					:display block
+	
+	#account
+		// :color #909090
+		:color #c1c1c1
+		:float right
+		:font-size 11px
+		:height 23px
+		:line-height 23px
+		
+		a
+			// :color #c1c1c1
+			:color #ffffff
+			:font-size 11px
+
+#content-wrapper
+	// :background = !background_color
+	:background-color #E1E6EB
+	:border-top 2px solid #333
+	:padding 25px 0
+	
+	#content
+		:margin 0 auto
+		:padding 10px
+		:text-shadow #fff 1px 1px 0
+		:width 960px
+		
+		#main
+			:width 705px
+		
+		#sidebar
+			:float right
+			:width 225px
+			
+			#q
+				:background
+					:image url(/images/search.png)
+					:position 10px 50%
+					:repeat no-repeat
+				:border 0
+				:-webkit-border-radius 25px
+				:-moz-border-radius 25px
+				:border-radius 25px
+				:-webkit-box-shadow 0 0 2px #A7AEB8
+				:-moz-box-shadow 0 1px 2px #A7AEB8
+				:box-shadow 0 1px 2px #A7AEB8
+				:display block
+				:font-size 12px
+				:line-height 12px
+				:outline 0
+				:padding 7px 15px 7px 30px
+				:width 180px
+				
+				&:focus
+					:-webkit-box-shadow 0 0 2px #225290
+					:-moz-box-shadow 0 1px 2px #225290
+					:box-shadow 0 1px 2px #225290
+			
+			h1
+				:font-size 13px
+				:line-height 17px
+				:margin-top 15px
+
+#footer-wrapper
+	:border-top 1px solid #EEF5FB
+	
+	#footer
+		:border-top 1px solid #a6a6a6
+		:color #444444
+		:font-size 12px
+		:padding 10px 25px 50px 25px
+		:text-shadow #fff 0 1px 1px
+		
+		#links
+			:float right
+			:margin-top -1px
+			
+			a
+				:color #111
+				:font-size 12px

@@ -1,0 +1,21 @@
+- form_for(@membership, :html => {:class => 'new_membership single'}) do |f|
+	%input{:type => 'hidden', :name => 'redirect_to', :value => @redirect_to}
+	
+	%h1 Join #{h(@community.name)}'s Developer Community. It's Free.
+	- if !can_view?
+		%hr
+		#closed-community
+			This is a #{@community.private? ? 'private' : 'closed'} community. Please join before continuing.
+	-else
+		%hr.spacer-bottom
+	
+	#aside.choice
+		.okay
+			%button{:type => 'submit'}
+				%span Yes, I'd like to join now.
+		
+		.cancel
+			= link_to('No, thanks.', (can_view? ? root_path : root_url(:host => BASE_DOMAIN)))
+	
+	%p
+		Join this community to keep up with the documentation and developer discussions for #{h(@community.name)}.

@@ -1,0 +1,14 @@
+- content_tag_for(:div, user) do
+	= image_tag(user.gravatar_url(:size => 48))
+	
+	.body
+		.actions
+			= time_ago_in_words(user.created_at) + ' ago &middot;'
+			= pluralize(user.memberships.count, 'Membership')
+		
+		%span
+			= h(user.name)
+		%span
+			= h(user.email_address)
+
+%hr

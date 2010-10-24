@@ -1,0 +1,34 @@
+- form_for(@user_session, :html => {:class => 'new_user_session single'}) do |f|
+	%h1 Welcome, Back.
+	- if defined?(@community) and !can_view?
+		%hr
+		#closed-community
+			This is a #{@community.private? ? 'private' : 'closed'} community. Please log in or #{link_to('register', register_path)} before continuing.
+	-else
+		%hr.spacer-bottom
+	
+	#aside
+		%span
+			Don't have an account?
+		%span
+			= link_to('Register now &#8594;', register_path)
+	
+	%p
+		= f.label(:email_address, 'Email Address:')
+		= f.text_field(:email_address)
+	
+	%p
+		= f.label(:password, 'Password:')
+		= f.password_field(:password)
+	
+	%p.submit
+		%button{:type => 'submit'}
+			%span Log in
+		
+		- if defined?(@community) and !can_view?
+			or #{link_to('Go back to do*connect', root_url(:host => BASE_DOMAIN))}
+		- elsif !defined?(@community)
+			or #{link_to('take me home', root_path)}
+
+:javascript
+	$j('#user_session_email_address').focus();

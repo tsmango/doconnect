@@ -1,0 +1,13 @@
+- if action.actionable
+	- content_tag_for(:div, action) do
+		= image_tag(action.user.gravatar_url(:size => 48))
+		
+		.body
+			%span
+				#{h(action.user.name)} #{render_action_item(action)}.
+			
+			- if !action.actionable.is_a?(Community)
+				%span
+					In the #{link_to(h(action.community.name), action.community.url)} Community
+	
+	%hr

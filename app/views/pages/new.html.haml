@@ -1,0 +1,23 @@
+- render(:layout => '/communities/container') do
+	- form_for(@page) do |f|
+		%h1 Create a Page
+		%hr.spacer-bottom
+		
+		= f.error_messages
+		
+		%p
+			= f.label(:name, 'Title:')
+			= f.text_field(:name)
+		
+		%p
+			= render(:partial => '/shared/markdown_cheat_sheet')
+			= f.text_area(:body)
+		
+		%p.submit
+			%button{:type => 'submit'}
+				%span Create Page
+			
+			= 'or ' + link_to('Cancel', root_path)
+
+:javascript
+	$j('#page_name').focus();

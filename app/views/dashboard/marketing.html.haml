@@ -1,0 +1,45 @@
+#marketing
+	#left
+		#about
+			%h1
+				%span EMPOWER
+				%span YOUR DEVELOPERS.
+			
+			%p
+				do*connect gives you a <strong>simple</strong> way to <strong>build and grow</strong> a third party developer community around <strong>your service</strong>.
+		
+		%ul#features
+			%li#documentation
+				%h1
+					documentation engine
+				%p
+					Support for versioned Markdown&#8482; pages in addition to 
+					structured API documentation.
+			
+			%li#discussion
+				%h1 discussion area
+				%p
+					Give your third party developers a place to talk, ask questions and 
+					learn from each other.
+			
+			%li#permissions
+				%h1 open, closed or private
+				%p
+					Flexible permissions allow you to keep your community open, require 
+					membership or even require approval.
+	
+	#right
+		- if defined?(@rumble)
+			#rumble
+				= link_to(image_tag('rumble_logo.png'), 'http://railsrumble.com/teams/the-crimson-ghost')
+		
+		#explore-or-register
+			%div
+				Want to learn more? #{link_to('Explore a Community', 'http://firefly.doconnect.me')}.
+			%div
+				If you've seen enough, #{link_to("register now", register_path)}. It's free.
+		
+		#screencast
+			= render(:partial => '/shared/screencast')
+	
+	%br.clear

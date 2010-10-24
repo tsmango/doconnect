@@ -1,0 +1,18 @@
+- render(:layout => '/communities/container') do
+	%h1
+		%span.actions
+			- if defined?(@page_revision) and !@page_revision.nil?
+				= link_to('Latest Revision', @page) + ' &middot;'
+			
+			= link_to('History', history_page_path(@page))
+			
+			- if can_manage?
+				= '&middot; ' + link_to('Edit &#8594;', edit_page_path(@page))
+		
+		= h(@page.name)
+	%hr.spacer-bottom
+	
+	- if defined?(@page_revision) and !@page_revision.nil?
+		= @page_revision.body_as_html
+	- else
+		= @page.last_revision.body_as_html

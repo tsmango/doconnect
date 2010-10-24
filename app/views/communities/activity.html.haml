@@ -1,0 +1,10 @@
+- render(:layout => '/communities/container') do
+	%h1 Recent Activity
+	%hr
+
+	- if @actions.size > 0
+		#actions
+			= render(@actions)
+	- else
+		.nothing
+			There hasn't been any activity in your Communities, yet.

@@ -1,0 +1,2 @@
+page << "$('community_subdomain').value = '#{@subdomain}';"
+page.replace_html('community_subdomain_preview', @subdomain)

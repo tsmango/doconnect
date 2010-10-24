@@ -1,0 +1,16 @@
+.fields
+	%p
+		.remove_fields
+			= link_to_remove_fields('Remove Response', f)
+		= f.label(:format, 'Response Format:')
+		= f.text_field(:format)
+	
+	%p
+		= f.label(:http_code, 'HTTP Status Code:')
+		= f.text_field(:http_code)
+	
+	%p
+		= f.label(:body, 'Example Response:')
+		= f.text_area(:body, :class => 'response_body')
+	
+	%hr

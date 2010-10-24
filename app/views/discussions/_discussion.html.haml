@@ -1,0 +1,9 @@
+- content_tag_for(:div, discussion) do
+	%h1
+		= link_to(h(discussion.title), discussion)
+	
+	.preview
+		= truncate(discussion.replies.first.body, :length => 325)
+	
+	.meta
+		Started by #{h(discussion.user.name)} &middot; #{discussion.created_at.strftime('%b %d')} &middot; #{pluralize(discussion.replies_count - 1, 'Reply')}

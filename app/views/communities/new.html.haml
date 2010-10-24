@@ -1,0 +1,59 @@
+- form_for(@community, :html => {:class => 'new_community single'}) do |f|
+	%h1 Start a Developer Community.
+	%hr.spacer-bottom
+	
+	= f.error_messages
+	
+	%p
+		= f.label(:name, 'Name:')
+		= f.text_field(:name)
+	
+	%p
+		= f.label(:subdomain, 'Community Address:')
+		%span.with-notes
+			= f.text_field(:subdomain)
+			
+			%span#community_url
+				http://<span id="community_subdomain_preview">#{@community.subdomain.blank? ? 'community' : @community.subdomain}</span>.doconnect.me
+	
+	%p
+		= f.label(:privacy, 'Privacy:')
+		%span.with-notes
+			= f.select(:privacy, [['Open', 1], ['Closed', 0], ['Private', -1]])
+			
+			%span#open.privacy_explanation
+				Only members can post, but anyone can join.
+			
+			%span#closed.privacy_explanation
+				Only members can view and post, but anyone can join.
+			
+			%span#private.privacy_explanation
+				Only members can view and post. Each member must be approved.
+	
+	%p.submit
+		%button{:type => 'submit'}
+			%span Create Community
+		
+		or #{link_to('Cancel', dashboard_path)}
+
+= observe_field(:community_name, :url => {:action => 'process_name'}, :with => 'name', :frequency => 0.25)
+
+:javascript
+	$j('#community_name').focus();
+	$j('#community_subdomain').keyup(function() {
+		$j('#community_subdomain_preview').text($j('#community_subdomain').val());
+	});
+	
+	#{show_privacy_explanation_for(@community)}
+	
+	$j('#community_privacy').change(function() {
+		$j('.privacy_explanation').hide();
+		
+		if($j('#community_privacy').val() == 1) {
+			$j('#open').show();
+		} else if($j('#community_privacy').val() == 0) {
+			$j('#closed').show();
+		} else if($j('#community_privacy').val() == -1) {
+			$j('#private').show();
+		}
+	});

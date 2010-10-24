@@ -1,0 +1,25 @@
+- content_tag_for(:div, membership) do
+	= image_tag(membership.user.gravatar_url(:size => 48))
+	
+	.body
+		- if logged_in? and !membership.manager? and current_user.id == membership.user_id
+			.actions
+				= link_to('Leave Community', membership, :confirm => 'Are you sure?', :method => :delete)
+		- if can_manage? and !membership.manager?
+			.actions
+				- if !membership.approved?
+					= link_to('Approve', approve_membership_path(membership), :method => :post)
+				- else
+					- if @community.private?
+						= link_to('Disapprove', disapprove_membership_path(membership), :method => :delete) + ' &middot;'
+					= link_to('Promote to Manager', promote_membership_path(membership), :method => :post)
+		- elsif can_manage? and current_user.id != membership.user_id
+			.actions
+				= link_to('Demote', demote_membership_path(membership), :method => :delete)
+		
+		%span
+			= h(membership.user.name)
+		%span
+			= (membership.manager? ? 'Community Manager' : '&nbsp;')
+
+%hr
